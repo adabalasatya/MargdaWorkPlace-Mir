@@ -208,7 +208,7 @@ const ForgetPasscode = () => {
       "success"
     );
     setTimeout(() => {
-      router.push("/work/login");
+      router.push("/login");
     }, 2000);
   };
 
