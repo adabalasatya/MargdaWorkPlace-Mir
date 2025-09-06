@@ -117,7 +117,6 @@ const ListData = () => {
         }
       } else {
         setSubscribers([]);
-        addToast("Failed to fetch subscribers: " + (data.message || "Unknown error"), "error");
       }
     } catch (error) {
       setSubscribers([]);

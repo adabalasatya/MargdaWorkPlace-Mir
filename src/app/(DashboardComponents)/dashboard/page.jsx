@@ -94,7 +94,7 @@ const Dashboard = () => {
         whatsappCampaigns.forEach(campaign => {
           whatsappSent += parseInt(campaign.whatsappSent) || 0;
           // Assuming higher delivery rate for WhatsApp
-          whatsappDelivered += Math.round((parseInt(campaign.whatsapp_Sent) || 0) * 0.95); // 95% delivery estimate
+          whatsappDelivered += Math.round((parseInt(campaign.whatsapp_sentt) || 0) * 0.95); // 95% delivery estimate
         });
       }
 
@@ -161,7 +161,7 @@ const Dashboard = () => {
       metricLabel: 'Opened',
       icon: Mail,
       iconBg: 'bg-blue-500',
-      trend: 12,
+      trend: 0,
       color: '#3b82f6',
       metricIcon: Eye
     },
@@ -174,7 +174,7 @@ const Dashboard = () => {
       metricLabel: 'Delivered',
       icon: MessageCircle,
       iconBg: 'bg-green-500',
-      trend: 8,
+      trend: 0,
       color: '#10b981',
       metricIcon: CheckCircle
     },
@@ -187,7 +187,7 @@ const Dashboard = () => {
       metricLabel: 'Delivered',
       icon: MessageSquare,
       iconBg: 'bg-purple-500',
-      trend: 15,
+      trend: 0,
       color: '#8b5cf6',
       metricIcon: CheckCircle
     }
@@ -456,40 +456,47 @@ const Dashboard = () => {
             </div>
 
             {/* Modern Pie Chart */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-white to-slate-50 rounded-2xl shadow-xl shadow-slate-200/50"></div>
-              <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-4 border border-gray-200">
-                <h3 className="text-xl font-bold text-slate-800 mb-4">Channel Distribution</h3>
-                <div className="h-76">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={pieChartData}
-                        cx="50%"
-                        cy="50%"
-                        outerRadius={80}
-                        dataKey="value"
-                        label={({ name, value }) => `${name} ${value}%`}
-                        labelLine={false}
-                      >
-                        {pieChartData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip 
-                        contentStyle={{ 
-                          backgroundColor: 'rgba(255, 255, 255, 0.95)', 
-                          border: 'none',
-                          borderRadius: '12px',
-                          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
-                          backdropFilter: 'blur(10px)'
-                        }} 
-                      />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-            </div>
+          
+<div className="relative">
+  <div className="absolute inset-0 bg-gradient-to-br from-white to-slate-50 rounded-2xl shadow-xl shadow-slate-200/50"></div>
+  <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-4 border border-gray-200">
+    <h3 className="text-xl font-bold text-slate-800 mb-4">Channel Distribution</h3>
+    <div className="h-76 flex items-center justify-center">
+      {campaignStats.email.sent === 0 && campaignStats.sms.sent === 0 && campaignStats.whatsapp.sent === 0 ? (
+        // ✅ Show N/A if no data
+        <span className="text-slate-500 text-lg font-semibold">N/A</span>
+      ) : (
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={pieChartData}
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+              dataKey="value"
+              label={({ name, value }) => `${name} ${value}%`}
+              labelLine={false}
+            >
+              {pieChartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Pie>
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+                border: 'none',
+                borderRadius: '12px',
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+                backdropFilter: 'blur(10px)'
+              }} 
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      )}
+    </div>
+  </div>
+</div>
+
           </div>
         </div>
       </div>

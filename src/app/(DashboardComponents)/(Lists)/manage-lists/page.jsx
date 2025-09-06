@@ -106,6 +106,7 @@ const ManageLists = () => {
       );
 
       const data = await response.json();
+      console.log(data)
       if (response.ok) {
         setLists(data.Lists || []);
       } else {
@@ -647,12 +648,12 @@ const ManageLists = () => {
                             </td>
                             <td className="px-6 py-4 text-center">
                               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                {item.subscribers || "0"}
+                                {item.subscribe_count || "0"}
                               </span>
                             </td>
                             <td className="px-6 py-4 text-center">
                               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
-                                {item.unSubscribers || "0"}
+                                {item.unsubscribe_count || "0"}
                               </span>
                             </td>
                              {/* <td className="px-6 py-4 text-center">
@@ -749,7 +750,7 @@ const ManageLists = () => {
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <p className="text-xs text-gray-500 mb-1">Active Subscribers</p>
-                          <p className="font-semibold text-blue-600">{item.subscribers || "0"}</p>
+                          <p className="font-semibold text-blue-600">{item.subscribe_count || "0"}</p>
                         </div>
                         {/* <div>
                           <p className="text-xs text-gray-500 mb-1">Segments</p>
@@ -757,7 +758,7 @@ const ManageLists = () => {
                         </div> */}
                         <div>
                           <p className="text-xs text-gray-500 mb-1">Unsubscribers</p>
-                          <p className="font-semibold text-amber-600">{item.unSubscribed || "0"}</p>
+                          <p className="font-semibold text-amber-600">{item.unsubscribe_count || "0"}</p>
                         </div>
                         {/* <div>
                           <p className="text-xs text-gray-500 mb-1">Bounced</p>
