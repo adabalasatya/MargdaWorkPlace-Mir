@@ -92,9 +92,9 @@ const Dashboard = () => {
         const whatsappData = await whatsappResponse.json();
         const whatsappCampaigns = whatsappData.data || [];
         whatsappCampaigns.forEach(campaign => {
-          whatsappSent += parseInt(campaign.whatsappSent) || 0;
+          whatsappSent += parseInt(campaign.whatsapp_sent) || 0;
           // Assuming higher delivery rate for WhatsApp
-          whatsappDelivered += Math.round((parseInt(campaign.whatsapp_sentt) || 0) * 0.95); // 95% delivery estimate
+          whatsappDelivered += Math.round((parseInt(campaign.whatsapp_sent) || 0) * 0.95); // 95% delivery estimate
         });
       }
 
@@ -246,10 +246,10 @@ const Dashboard = () => {
                     <div className={`p-3 rounded-xl ${card.iconBg} shadow-lg`}>
                       <IconComponent className="h-6 w-6 text-white" />
                     </div>
-                    <div className="flex items-center text-green-600 font-semibold">
+                    {/* <div className="flex items-center text-green-600 font-semibold">
                       <ArrowUpRight className="h-4 w-4 mr-1" />
                       +{card.trend}%
-                    </div>
+                    </div> */}
                   </div>
                   
                   {/* Title */}
@@ -459,12 +459,12 @@ const Dashboard = () => {
           
 <div className="relative">
   <div className="absolute inset-0 bg-gradient-to-br from-white to-slate-50 rounded-2xl shadow-xl shadow-slate-200/50"></div>
-  <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-4 border border-gray-200">
+  <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-3 border border-gray-200">
     <h3 className="text-xl font-bold text-slate-800 mb-4">Channel Distribution</h3>
     <div className="h-76 flex items-center justify-center">
       {campaignStats.email.sent === 0 && campaignStats.sms.sent === 0 && campaignStats.whatsapp.sent === 0 ? (
         // ✅ Show N/A if no data
-        <span className="text-slate-500 text-lg font-semibold">N/A</span>
+        <span className="text-slate-500 text-2xl font-semibold">N/A</span>
       ) : (
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
