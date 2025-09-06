@@ -94,7 +94,6 @@ const WhatsappReport = () => {
 
       if (response.ok) {
         const data = await response.json();
-        
         // Only update state if data has actually changed
         setChats(prevChats => {
           // Simple comparison - you might want a more robust comparison

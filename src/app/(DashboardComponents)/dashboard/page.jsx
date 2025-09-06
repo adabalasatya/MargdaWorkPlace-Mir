@@ -64,9 +64,9 @@ const Dashboard = () => {
         const emailData = await emailResponse.json();
         const emailCampaigns = emailData.data || [];
         emailCampaigns.forEach(campaign => {
-          emailSent += parseInt(campaign.emailsSent) || 0;
-          emailOpened += parseInt(campaign.emailsOpened) || 0;
-          emailBounced += parseInt(campaign.emailsBounced) || 0;
+          emailSent += parseInt(campaign.emails_Sent) || 0;
+          emailOpened += parseInt(campaign.emails_opened) || 0;
+          emailBounced += parseInt(campaign.emails_bounced) || 0;
         });
       }
 
@@ -78,9 +78,9 @@ const Dashboard = () => {
         const smsData = await smsResponse.json();
         const smsCampaigns = smsData.data || [];
         smsCampaigns.forEach(campaign => {
-          smsSent += parseInt(campaign.smsSent) || 0;
+          smsSent += parseInt(campaign.sms_sent) || 0;
           // Assuming delivered rate is similar to success rate
-          smsDelivered += Math.round((parseInt(campaign.smsSent) || 0) * 0.85); // 85% delivery estimate
+          smsDelivered += Math.round((parseInt(campaign.sms_sent) || 0) * 0.85); // 85% delivery estimate
         });
       }
 
@@ -94,7 +94,7 @@ const Dashboard = () => {
         whatsappCampaigns.forEach(campaign => {
           whatsappSent += parseInt(campaign.whatsappSent) || 0;
           // Assuming higher delivery rate for WhatsApp
-          whatsappDelivered += Math.round((parseInt(campaign.whatsappSent) || 0) * 0.95); // 95% delivery estimate
+          whatsappDelivered += Math.round((parseInt(campaign.whatsapp_Sent) || 0) * 0.95); // 95% delivery estimate
         });
       }
 
@@ -272,23 +272,25 @@ const Dashboard = () => {
                       </div>
                       <span className="text-2xl font-bold text-slate-900">{card.metric.toLocaleString()}</span>
                     </div>
-                    
-                    {/* Progress Bar */}
-                    <div className="pt-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-slate-700">{card.rateLabel}</span>
-                        <span className="text-lg font-bold" style={{color: card.color}}>{card.rate}%</span>
-                      </div>
-                      <div className="w-full bg-slate-200 rounded-full h-2">
-                        <div 
-                          className="h-2 rounded-full transition-all duration-500"
-                          style={{
-                            width: `${card.rate}%`,
-                            background: `linear-gradient(90deg, ${card.color}, ${card.color}dd)`
-                          }}
-                        ></div>
-                      </div>
-                    </div>
+                   {/* Progress Bar */}
+<div className="pt-4">
+  <div className="flex items-center justify-between mb-2">
+    <span className="text-sm font-medium text-slate-700">{card.rateLabel}</span>
+    <span className="text-lg font-bold" style={{ color: card.color }}>
+      {card.rate}%
+    </span>
+  </div>
+  <div className="w-full bg-slate-200 rounded-full h-2">
+    <div
+      className="h-2 rounded-full transition-all duration-500"
+      style={{
+        width: `${Math.min(card.rate, 100)}%`, // ✅ Cap at 100%
+        background: `linear-gradient(90deg, ${card.color}, ${card.color}dd)`
+      }}
+    ></div>
+  </div>
+</div>
+
                   </div>
                 </div>
               </div>

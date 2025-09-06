@@ -546,7 +546,7 @@ const EmailCampaign = () => {
       <div className="ml-3">
         <p className="text-xs text-gray-600">Total Sent</p>
         <p className="text-lg font-bold text-gray-800">
-          {campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.emailsSent) || 0), 0).toLocaleString()}
+          {campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.emails_Sent) || 0), 0).toLocaleString()}
         </p>
       </div>
     </div>
@@ -560,7 +560,7 @@ const EmailCampaign = () => {
       <div className="ml-3">
         <p className="text-xs text-gray-600">Total Opens</p>
         <p className="text-lg font-bold text-gray-800">
-          {campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.emailsOpened) || 0), 0).toLocaleString()}
+          {campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.emails_opened) || 0), 0).toLocaleString()}
         </p>
       </div>
     </div>
@@ -575,7 +575,7 @@ const EmailCampaign = () => {
         <p className="text-xs text-gray-600">Open Rate</p>
         <p className="text-lg font-bold text-gray-800">
           {campaigns.length > 0 
-            ? `${Math.round((campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.emailsOpened) || 0), 0) / campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.emailsSent) || 0), 0)) * 100) || 0}%`
+            ? `${Math.round((campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.emails_opened) || 0), 0) / campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.emails_Sent) || 0), 0)) * 100) || 0}%`
             : '0%'}
         </p>
       </div>
@@ -972,12 +972,12 @@ const EmailCampaign = () => {
                           </td>
                           <td className="px-6 py-4 text-center">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800 font-medium">
-                              {campaign.emailsSent || "0"}
+                              {campaign.emails_Sent || "0"}
                             </span>
                           </td>
                           <td className="px-6 py-4 text-center">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800 font-medium">
-                              {campaign.emailsOpened || "0"}
+                              {campaign.emails_opened || "0"}
                             </span>
                           </td>
                           {/* <td className="px-6 py-4 text-center">
@@ -987,7 +987,7 @@ const EmailCampaign = () => {
                           </td> */}
                           <td className="px-6 py-4 text-center">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-red-100 text-red-800 font-medium">
-                              {campaign.emailsBounced || "0"}
+                              {campaign.emails_bounced || "0"}
                             </span>
                           </td>
                           <td className="px-6 py-4">
@@ -1069,16 +1069,16 @@ const EmailCampaign = () => {
                         <div className="flex gap-4">
                           <div className="text-center">
                             <p className="text-xs text-gray-500">Sent</p>
-                            <p className="font-semibold text-blue-600">{campaign.emailsSent || "0"}</p>
+                            <p className="font-semibold text-blue-600">{campaign.emails_Sent || "0"}</p>
                           </div>
                           <div className="text-center">
                             <p className="text-xs text-gray-500">Opens</p>
-                            <p className="font-semibold text-green-600">{campaign.emailsOpened || "0"}</p>
+                            <p className="font-semibold text-green-600">{campaign.emails_opened || "0"}</p>
                           </div>
-                          {/* <div className="text-center">
+                          <div className="text-center">
                             <p className="text-xs text-gray-500">Bounces</p>
-                            <p className="font-semibold text-red-600">{campaign.bounce || "0"}</p>
-                          </div> */}
+                            <p className="font-semibold text-red-600">{campaign.emails_bounced || "0"}</p>
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -425,7 +425,7 @@ const Sidebar = ({ toggleSidebar }) => {
                     alt="Company Logo"
                     width={180}
                     height={32}
-                    className="h-8 object-contain"
+                    className="object-contain"
                     priority
                   />
                 </div>

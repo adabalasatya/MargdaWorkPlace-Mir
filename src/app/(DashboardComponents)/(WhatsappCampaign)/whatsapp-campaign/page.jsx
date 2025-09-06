@@ -87,6 +87,7 @@ const WhatsAppCampaign = () => {
       if (response.ok) {
         const data = await response.json();
         setCampaigns(data.data || []);
+        console.log(data)
       } else {
         setCampaigns([]);
       }
@@ -519,7 +520,7 @@ const WhatsAppCampaign = () => {
       </div>
       <div className="ml-3">
         <p className="text-xs text-gray-600">Messages Sent</p>
-        {campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.whatsappSent) || 0), 0).toLocaleString()}
+        {campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.whatsapp_sent) || 0), 0).toLocaleString()}
       </div>
     </div>
   </div>
@@ -532,7 +533,7 @@ const WhatsAppCampaign = () => {
       <div className="ml-3">
         <p className="text-xs text-gray-600">Success Rate</p>
          {campaigns.length > 0 
-            ? `${Math.round((campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.whatsappSent) || 0), 0) / campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.whatsappSent) || 0), 0)) * 100) || 0}%`
+            ? `${Math.round((campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.whatsapp_sent) || 0), 0) / campaigns.reduce((sum, campaign) => sum + (parseInt(campaign.whatsapp_sent) || 0), 0)) * 100) || 0}%`
             : '0%'}
       </div>
     </div>
@@ -711,7 +712,7 @@ const WhatsAppCampaign = () => {
                           </td>
                           <td className="px-6 py-4 text-center">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800 font-medium">
-                              {campaign.whatsappSent || "0"}
+                              {campaign.whatsapp_sent || "0"}
                             </span>
                           </td>
                           <td className="px-6 py-4">
@@ -792,7 +793,7 @@ const WhatsAppCampaign = () => {
                       <div className="flex justify-between items-center pt-4 border-t border-gray-100">
                         <div className="text-center">
                           <p className="text-xs text-gray-500">Success</p>
-                          <p className="font-semibold text-green-600">{campaign.whatsappSent || "0"}</p>
+                          <p className="font-semibold text-green-600">{campaign.whatsapp_sent || "0"}</p>
                         </div>
                       </div>
                     </div>
